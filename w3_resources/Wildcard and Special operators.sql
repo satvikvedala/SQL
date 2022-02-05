@@ -67,3 +67,47 @@ where col1 not like '%/_%';
 select *
 from testtable
 where col1 like '%$/%' escape '$';
+
+15.
+select *
+from testtable
+where col1 not like '%$/%' escape '$';
+
+16.
+select *
+from testtable
+where col1 like '%$_/%' escape '$';
+
+select *
+from testtable
+where col1 like '%\\_/%';
+
+17.
+select *
+from testtable
+where col1 not like '%\\_/%';
+
+18.
+select *
+from testtable
+where col1 like '%\\%%';
+
+19.
+select *
+from testtable
+where col1 not like '%\\%%';
+
+20.
+select *
+from customer
+where grade is NULL;
+
+21.
+select *
+from customer
+where grade is not NULL;
+
+22.
+select *
+from emp_details
+where emp_lname like 'D%';

@@ -82,5 +82,99 @@ from salesman s
 cross join customer c;
 
 18.
+select s.salesman_id,s.name,s.city,s.commission
+from salesman s
+cross join customer c
+where (s.city is not NULL) and (c.city is not NULL);
 
+19.
+select s.salesman_id,s.name,s.city,s.commission
+from salesman s
+cross join customer c
+where (s.city is not NULL) and (c.city is not NULL) and (c.grade is not NULL);
+
+20.
+select s.salesman_id,s.name,s.city,s.commission
+from salesman s
+cross join customer c
+where (s.city is not NULL) and (s.city != c.city) and (c.grade is not NULL);
+
+21.
+select *
+from company_mast cm,item_mast im
+where cm.com_id = im.pro_com;
+
+--or
+select *
+from company_mast cm
+inner join item_mast im
+on cm.com_id = im.pro_com;
+
+22.
+select cm.com_name, avg(im.pro_price)
+from company_mast cm
+inner join item_mast im
+on cm.com_id = im.pro_com
+group by cm.com_name;
+
+23.
+select cm.com_name, avg(im.pro_price)
+from company_mast cm
+inner join item_mast im
+on cm.com_id = im.pro_com
+group by cm.com_name;
+
+24.
+select cm.com_name, avg(im.pro_price)
+from company_mast cm
+inner join item_mast im
+on cm.com_id = im.pro_com
+group by cm.com_name
+having avg(im.pro_price)>=350;
+
+25.
+select cm.com_name, im.pro_price,im.pro_name
+from item_mast im
+inner join company_mast cm
+on cm.com_id = im.pro_com
+where im.pro_price = 
+(
+select max(a.pro_price)
+from item_mast a
+where cm.com_id = a.pro_com
+);
+
+26.
+select e.emp_idno, e.emp_fname, e.emp_lname, e.emp_dept,d.dpt_name
+from emp_details e
+left join emp_department d
+on e.emp_dept = d.dpt_code;
+
+27.
+select e.emp_fname, e.emp_lname,d.dpt_name,d.dpt_allotment
+from emp_details e
+left join emp_department d
+on e.emp_dept = d.dpt_code;
+
+--or
+
+select e.emp_fname, e.emp_lname,d.dpt_name,d.dpt_allotment
+from emp_details e
+inner join emp_department d
+on e.emp_dept = d.dpt_code;
+
+28.
+select e.emp_fname, e.emp_lname
+from emp_details e
+inner join emp_department d
+on e.emp_dept = d.dpt_code
+where d.dpt_allotment>50000;
+
+29.
+select d.dpt_name
+from emp_department d
+inner join emp_details e
+on e.emp_dept = d.dpt_code
+group by d.dpt_name
+having count(*)>1;
 

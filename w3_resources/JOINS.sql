@@ -76,5 +76,11 @@ cross join salesman s
 where (s.salesman_id = c.salesman_id)
 order by customer_id asc;
 
+17.
+select s.salesman_id,s.name,s.city,s.commission
+from salesman s
+cross join customer c;
+
+18.
 
 

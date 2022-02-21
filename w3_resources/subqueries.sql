@@ -85,3 +85,73 @@ select *
 from orders 
 where purch_amt > (select avg(purch_amt)
                 from orders);
+               
+13.
+select *
+from orders
+where purch_amt >= (select avg(prch_amt) from orders);
+
+14.
+
+
+15.
+select *
+from customer
+where exists (select *
+from customer
+where city = 'London');
+
+16.
+select *
+from salesman
+where salesman_id = (select salesman_id
+                     from customer
+                     group by salesman_id
+                     having count(*)>1);
+
+17.
+select *
+from salesman
+where salesman_id = (select salesman_id
+                     from customer
+                     group by salesman_id
+                     having count(*) == 1);
+                     
+18.
+19.
+select s.salesman_id, s.name, s.city, s.commission
+from salesman s
+where city in (select city from customer);  
+
+20.
+select s.salesman_id, s.name, s.city, s.commission
+from salesman s
+where city in (select city from customer); 
+
+21.
+select *
+from salesman s
+where exists (select *
+              from customer c
+              where c.cust_name>s.name);
+              
+22.
+select *
+from customer a
+where exists (select *
+              from customer b
+              where (b.city<'New York') and (a.grade>b.grade));
+              
+23.
+select *
+from orders
+where purch_amt > any (select purch_amt
+                   from orders
+                   where ord_date = '2012-09-10');
+--or
+select *
+from orders o
+where exists (select *
+              from orders a
+              where (a.ord_date = '2012-09-10') and (a.purch_amt<o.purch_amt));
+                   

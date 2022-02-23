@@ -202,4 +202,67 @@ where grade!= any (select grade
                from customer
                where city = 'Dallas');
 
+31.
+select cm.com_name,avg(im.pro_price)
+from company_mast cm, item_mast im
+where cm.com_id = im.pro_com
+group by cm.com_name;
+                                           
+32.
+select cm.com_name,avg(im.pro_price)
+from company_mast cm, item_mast im
+where cm.com_id = im.pro_com
+group by cm.com_name
+having avg(im.pro_price)>350;
+                                           
+33.
+select im.pro_name,im.pro_price,cm.com_name
+from company_mast cm,item_mast im
+where (cm.com_id = im.pro_com) and im.pro_price = (select max(pro_price) 
+                                                   from item_mast im 
+                                                   where im.pro_com = cm.com_id); 
+                                           
+34.
+select *
+from emp_details
+where EMP_LNAME in ('Gabriel','Dosio');
+                                          
+35.
+select *
+from emp_details
+where emp_dept in (89,63);
+                                           
+36.
+select e.emp_fname,e.emp_lname
+from emp_details e, emp_department em
+where (e.emp_dept = em.dpt_code) and (em.dpt_allotment>50000);
+                                           
+37.
+select dpt_code,dpt_name,dpt_allotment
+from emp_department
+where dpt_allotment>(select avg(dpt_allotment)
+                     from emp_department);
+38.
+select dpt_name
+from emp_department a
+where dpt_code in (select emp_dept
+                   from emp_details b
+                   where (a.dpt_code = b.emp_dept and count(*)>1);
+38.
+select e.dpt_name
+from emp_department e, emp_details ed
+where e.dpt_code = ed.emp_dept
+group by e.dpt_name
+having count(*)>2;
+
+39.
+select emp_fname, emp_lname
+from emp_details
+where emp_dept = (select dpt_code
+from emp_department
+where dpt_allotment  != (select min(dpt_allotment) from emp_department)
+order by dpt_code
+limit 1);
+                    
+                  
                                            

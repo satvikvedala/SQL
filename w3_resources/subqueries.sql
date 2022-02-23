@@ -155,3 +155,51 @@ where exists (select *
               from orders a
               where (a.ord_date = '2012-09-10') and (a.purch_amt<o.purch_amt));
                    
+24.
+select *
+from orders a 
+where a.purch_amt< any(select purch_amt
+                       from orders
+                       where customer_id in (select customer_id
+                                             from customer
+                                             where city = 'London'));
+25.
+select *
+from orders a
+where a.purch_amt< (select max(purch_amt)
+from orders o, customer c
+where (o.customer_id = c.customer_id) and c.city = 'London');
+
+26.
+select *
+from customer
+where grade > all (select grade
+               from customer
+               where city = 'New York');
+               
+27.
+select s.salesman_id, s.name, s.city,o.purch_amt
+from salesman s,orders o
+where (s.slaesman_id = o.salesman_id) and (;
+                                           
+28.
+select *
+from customer
+where grade!= any (select grade
+               from customer
+               where city = 'London');
+29.
+select *
+from customer
+where grade!= any (select grade
+               from customer
+               where city = 'Paris'); 
+
+30.
+select *
+from customer
+where grade!= any (select grade
+               from customer
+               where city = 'Dallas');
+
+                                           
